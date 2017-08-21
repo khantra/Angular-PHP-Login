@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<body>
+<div ng-app="myAPP" ng-controller="addUserFormCtrl">
+<form  >
+ <fieldset>
+	<legend>Registration:</legend>
+	<h1>My Name is {{firstName}} {{lastName}}</h1>
+	<h3>This App can send notifications and deals to {{email}}</h3>
+	<p>First Name : <input type="text" ng-model="firstName"></p>
+	<p>Last Name : <input type="text" ng-model="lastName"></p>
+	<p>Email : <input type="email" name="myEmail" ng-model="email"></p>
+	<p>Password : <input type="text" ng-model="password"></p>
+	
+	<button ng-click="register()">Register</button>
+	<p>url : {{URL}}</p>
+
+   </fieldset>
+</form>
+</div>
+
+<script>
+var app = angular.module('myAPP', []);
+app.controller('addUserFormCtrl', function($scope, $location, $http) {
+    $scope.URL = $location.absUrl();
+    $scope.register = function() {
+		$http.post(  
+			"insertUser.php",  
+			{'firstName':$scope.firstName, 'lastName':$scope.lastName, 'password':$scope.password}  
+		)
+    };
+    $scope.register();
+});
+</script>
+<script type="text/javascript" src="app/app.js"></script>
+
+</body>
+</html>
