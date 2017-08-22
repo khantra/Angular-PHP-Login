@@ -1,10 +1,74 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<head>
+<title>Page Title</title>
+<style>
+/*-------------------------
+    The menu
+--------------------------*/
 
+nav{
+    display:inline-block;
+    margin:60px auto 45px;
+    background-color:#ff8508;
+    box-shadow:0 1px 1px #ccc;
+    border-radius:2px;
+	width: 100%;
+}
+
+nav a{
+    display:inline-block;
+    padding: 18px 30px;
+    color:#fff !important;
+    font-weight:bold;
+    font-size:16px;
+    text-decoration:none !important;
+    line-height:1;
+    text-transform: uppercase;
+    background-color:transparent;
+
+    -webkit-transition:background-color 0.25s;
+    -moz-transition:background-color 0.25s;
+    transition:background-color 0.25s;
+}
+
+nav a:first-child{
+    border-radius:2px 0 0 2px;
+}
+
+nav a:last-child{
+    border-radius:0 2px 2px 0;
+}
+
+nav.home .home,
+nav.projects .projects,
+nav.services .services,
+nav.contact .contact{
+    background-color:#494949;
+}
+
+</style>
+</head>
 <body>
+
+
 <div ng-app="myAPP" ng-controller="addUserFormCtrl">
+
+    <nav class="{{active}}" ng-click="$event.preventDefault()">
+
+
+        <a href="#" class="home" ng-click="active='One'">One</a>
+        <a href="#" class="projects" ng-click="active='Two'">Two</a>
+        <a href="#" class="services" ng-click="active='Three'">Three</a>
+        <a href="#" class="contact" ng-click="active='Four'">Four</a>
+    </nav>
+
+
+    <p ng-hide="active">Welcome </p>
+    <p ng-show="active">This is Page number <b>{{active}}</b> </p>
 <form  >
+
  <fieldset>
 	<legend>Registration:</legend>
 	<h1>My Name is {{firstName}} {{lastName}}</h1>
@@ -25,13 +89,7 @@
 var app = angular.module('myAPP', []);
 app.controller('addUserFormCtrl', function($scope, $location, $http) {
     $scope.URL = $location.absUrl();
-    $scope.register = function() {
-		$http.post(  
-			"insertUser.php",  
-			{'firstName':$scope.firstName, 'lastName':$scope.lastName, 'password':$scope.password}  
-		)
-    };
-    $scope.register();
+
 });
 </script>
 <script type="text/javascript" src="app/app.js"></script>
